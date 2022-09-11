@@ -1,5 +1,6 @@
-# app_pertemuan2
+# Developing Flutter Application
 
-BMI CALCULATOR by ARFI ZULFIANSYAH
+Update App
+Pertemuan V2.1 = BMI CALCULATOR by ARFI ZULFIANSYAH
 
 
