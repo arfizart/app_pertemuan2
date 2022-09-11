@@ -1,6 +1,6 @@
 # app_pertemuan2
 
-A new Flutter project.
+BMI CALCULATOR by ARFI ZULFIANSYAH
 
 ## Getting Started
 

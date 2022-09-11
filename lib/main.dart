@@ -1,72 +1,132 @@
-import 'package:app_pertemuan2/bmi.dart';
+import 'package:app_pertemuan2/bmi_result.dart';
+import 'package:app_pertemuan2/bmi_screen.dart';
+import 'package:app_pertemuan2/home.dart';
 import 'package:app_pertemuan2/second_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:another_flushbar/flushbar.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+// void main() {
+//   runApp(const MyApp());
+// }
+
+Widget myappBar = Row(
+  mainAxisAlignment: MainAxisAlignment.start,
+  children: const [Text("BMI Calculator")],
+);
+
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _showFab = true;
+  bool _showNotch = true;
+  FloatingActionButtonLocation _fabLocation =
+      FloatingActionButtonLocation.centerDocked;
+
+  @override
+  void initState() {
+    super.initState();
+    initialization();
+  }
+
+  void initialization() async {
+    print('ready in 3...');
+    await Future.delayed(const Duration(seconds: 1));
+    print('ready in 2...');
+    await Future.delayed(const Duration(seconds: 1));
+    print('ready in 1...');
+    await Future.delayed(const Duration(seconds: 1));
+    print('go!');
+    FlutterNativeSplash.remove();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Bootcamp App - Arfi.Zul',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'Pertemuan ke #2'),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          leading: Icon(Icons.calculate),
+          title: myappBar,
+          actions: <Widget>[
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 25),
+              child: Center(
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundImage: NetworkImage("https://picsum.photos/200"),
+                ),
+              ),
+            ),
+          ],
+        ),
+        body: const BmiScreen(),
+        // bottomNavigationBar: _BottomAppBar(),
+      ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class _BottomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Image(
-              image: AssetImage("assets/images/logo.png"),
-              height: 50,
+    return BottomAppBar(
+      notchMargin: 1,
+      color: Colors.green,
+      child: IconTheme(
+        data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            IconButton(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              icon: const Icon(
+                Icons.home_filled,
+                size: 30,
+              ),
+              onPressed: () async {},
             ),
-            Text("Selamat Datang"),
+            IconButton(
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              icon: const Icon(
+                Icons.calculate,
+                size: 30,
+              ),
+              onPressed: () async {},
+            ),
+            IconButton(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              icon: const Icon(
+                Icons.person,
+                size: 30,
+              ),
+              onPressed: () async {
+                await Flushbar(
+                  title: 'Klik Profile',
+                  message: 'Anda mengklik icon profile',
+                  duration: Duration(seconds: 1),
+                ).show(context);
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const SecondScreen(),
+                ));
+              },
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => BmiCalculator(),
-          ));
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.home_filled),
       ),
     );
   }

@@ -9,14 +9,27 @@ class SecondScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Halaman Kedua"),
+        title: const Text("Halaman Profile"),
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Kembali'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            CircleAvatar(
+              radius: 100,
+              backgroundImage: NetworkImage("https://picsum.photos/200"),
+            ),
+            Text("Arfi Zulfiansyah"),
+            FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              label: const Text("Home"),
+              tooltip: 'Back',
+              icon: const Icon(Icons.home_filled),
+              backgroundColor: Colors.green,
+            ),
+          ],
         ),
       ),
     );
