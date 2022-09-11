@@ -1,3 +1,5 @@
+import 'package:another_flushbar/flushbar.dart';
+import 'package:app_pertemuan2/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:invert_colors/invert_colors.dart';
 
@@ -18,9 +20,22 @@ class myHome extends StatelessWidget {
               children: [
                 Container(
                   alignment: Alignment.center,
-                  child: CircleAvatar(
-                    radius: 100,
-                    backgroundImage: NetworkImage("https://picsum.photos/200"),
+                  child: GestureDetector(
+                    onTap: () async {
+                      await Flushbar(
+                        title: 'Klik Profile',
+                        message: 'Anda mengklik icon profile',
+                        duration: Duration(seconds: 1),
+                      ).show(context);
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const SecondScreen(),
+                      ));
+                    },
+                    child: CircleAvatar(
+                      radius: 100,
+                      backgroundImage:
+                          NetworkImage("https://picsum.photos/200"),
+                    ),
                   ),
                 ),
                 Container(

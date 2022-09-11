@@ -2,8 +2,6 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:app_pertemuan2/bmi_result.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class BmiScreen extends StatefulWidget {
   const BmiScreen({Key? key}) : super(key: key);
@@ -112,7 +110,7 @@ class _BmiScreenState extends State<BmiScreen> {
   int age = 20;
   int heightSize = 60;
   String categories = '';
-  String genderText = "Select Gender";
+  String genderText = "Select";
 
   double _bmi = 0.0;
 
@@ -121,7 +119,7 @@ class _BmiScreenState extends State<BmiScreen> {
     weight = 60;
     age = 20;
     categories = '';
-    genderText = "Select Gender";
+    genderText = "Select";
   }
 
   String calculateBMI() {
@@ -208,14 +206,14 @@ class _BmiScreenState extends State<BmiScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Container(
-                            margin: EdgeInsets.all(20),
+                            margin: EdgeInsets.all(10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   'I\'Am',
                                   style: TextStyle(
-                                    fontSize: 50,
+                                    fontSize: 30,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
@@ -223,7 +221,7 @@ class _BmiScreenState extends State<BmiScreen> {
                                 Text(
                                   genderText,
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     color: SelectedColor,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -502,7 +500,8 @@ class _BmiScreenState extends State<BmiScreen> {
                                             interpretation: getInterpretation(),
                                             categories: getCategoryBMI(),
                                           ),
-                                        ));
+                                        )
+                                        );
                                       },
                                     ),
                                   ],

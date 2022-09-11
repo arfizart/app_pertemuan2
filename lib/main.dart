@@ -1,6 +1,4 @@
-import 'package:app_pertemuan2/bmi_result.dart';
 import 'package:app_pertemuan2/bmi_screen.dart';
-import 'package:app_pertemuan2/home.dart';
 import 'package:app_pertemuan2/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:another_flushbar/flushbar.dart';
@@ -29,11 +27,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _showFab = true;
-  bool _showNotch = true;
-  FloatingActionButtonLocation _fabLocation =
-      FloatingActionButtonLocation.centerDocked;
-
   @override
   void initState() {
     super.initState();
@@ -41,15 +34,17 @@ class _MyAppState extends State<MyApp> {
   }
 
   void initialization() async {
-    print('ready in 3...');
     await Future.delayed(const Duration(seconds: 1));
-    print('ready in 2...');
     await Future.delayed(const Duration(seconds: 1));
-    print('ready in 1...');
     await Future.delayed(const Duration(seconds: 1));
-    print('go!');
     FlutterNativeSplash.remove();
   }
+
+  static final List<Widget> _widgetOptions = <Widget>[
+    const BmiScreen(),
+    const SecondScreen()
+  ];
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -60,21 +55,34 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          leading: Icon(Icons.calculate),
+          leading: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 0;
+                });
+              },
+              child: Icon(Icons.calculate)),
           title: myappBar,
           actions: <Widget>[
             Container(
               margin: EdgeInsets.symmetric(horizontal: 25),
               child: Center(
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundImage: NetworkImage("https://picsum.photos/200"),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex = 1;
+                    });
+                  },
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundImage: NetworkImage("https://picsum.photos/200"),
+                  ),
                 ),
               ),
             ),
           ],
         ),
-        body: const BmiScreen(),
+        body: _widgetOptions[_selectedIndex],
         // bottomNavigationBar: _BottomAppBar(),
       ),
     );
@@ -106,7 +114,7 @@ class _BottomAppBar extends StatelessWidget {
                 Icons.calculate,
                 size: 30,
               ),
-              onPressed: () async {},
+              onPressed: () {},
             ),
             IconButton(
               padding: EdgeInsets.symmetric(horizontal: 20),
