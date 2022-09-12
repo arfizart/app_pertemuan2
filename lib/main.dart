@@ -114,7 +114,13 @@ class _BottomAppBar extends StatelessWidget {
                 Icons.calculate,
                 size: 30,
               ),
-              onPressed: () {},
+              onPressed: () async {
+                await Flushbar(
+                  title: 'Progress',
+                  message: 'Calculating..',
+                  duration: Duration(seconds: 1),
+                ).show(context);
+              },
             ),
             IconButton(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -122,16 +128,7 @@ class _BottomAppBar extends StatelessWidget {
                 Icons.person,
                 size: 30,
               ),
-              onPressed: () async {
-                await Flushbar(
-                  title: 'Klik Profile',
-                  message: 'Anda mengklik icon profile',
-                  duration: Duration(seconds: 1),
-                ).show(context);
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const SecondScreen(),
-                ));
-              },
+              onPressed: () {},
             ),
           ],
         ),

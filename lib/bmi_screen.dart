@@ -500,8 +500,7 @@ class _BmiScreenState extends State<BmiScreen> {
                                             interpretation: getInterpretation(),
                                             categories: getCategoryBMI(),
                                           ),
-                                        )
-                                        );
+                                        ));
                                       },
                                     ),
                                   ],

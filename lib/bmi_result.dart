@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class BmiResult extends StatelessWidget {
-  BmiResult(
+  // ignore: use_key_in_widget_constructors
+  const BmiResult(
       {required this.interpretation,
       required this.bmiResult,
       required this.resultText,
@@ -36,7 +35,7 @@ class BmiResult extends StatelessWidget {
           children: [
             Column(
               children: [
-                Text(
+                const Text(
                   "Your BMI",
                   style: TextStyle(
                     fontSize: 20,
@@ -67,7 +66,7 @@ class BmiResult extends StatelessWidget {
                 Text(
                   categories,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.black26,
                   ),
@@ -75,7 +74,7 @@ class BmiResult extends StatelessWidget {
               ],
             ),
             Container(
-              margin: EdgeInsets.all(15),
+              margin: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 color: colorInfoText(),
@@ -84,7 +83,7 @@ class BmiResult extends StatelessWidget {
                 interpretation,
                 maxLines: 3,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 30,
                   color: Colors.white,
                 ),
